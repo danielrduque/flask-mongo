@@ -8,7 +8,6 @@ class ReporteModel:
         proyectos y responsables, filtrado por un grupo de edad específico.
         """
         
-        # La misma consulta que tenías en el controlador, ahora vive aquí.
         pipeline = [
             {
                 "$lookup": {
@@ -61,7 +60,6 @@ class ReporteModel:
                     }
                 }
             },
-            # ✨ MEJORA OPCIONAL: Es más eficiente filtrar por el campo que acabas de crear.
             {
                 "$match": {
                     "grupo_etareo": "adulto_medio"
@@ -74,6 +72,5 @@ class ReporteModel:
             }
         ]
         
-        # El modelo se encarga de ejecutar la consulta y devolver los datos.
         reporte_data = list(mongo.db.tarea.aggregate(pipeline))
         return reporte_data
